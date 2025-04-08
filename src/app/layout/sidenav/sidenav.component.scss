@@ -1,0 +1,26 @@
+.mat-sidenav-container {
+  height: 91vh;
+}
+
+.mat-sidenav {
+  padding: 20px;
+  width: 250px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+.example-card {
+  min-width: 100%;
+  min-height: 88vh;
+  background-color: var(--background-color);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.content-container {
+  margin: 10px;
+}
