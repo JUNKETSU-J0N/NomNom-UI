@@ -24,6 +24,6 @@ jobs:
 
       - name: Run Tests
         run: |
-          npm run test -- --watch=false --browsers=ChromeHeadlessCI --code-coverage 
+          npm run test -- --watch=false --code-coverage 
         env:
           CI: true 
