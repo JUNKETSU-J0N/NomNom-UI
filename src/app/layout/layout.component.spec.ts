@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LayoutComponent } from './layout.component';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
@@ -16,6 +16,12 @@ describe('LayoutComponent', () => {
         ToolbarComponent,
         SidenavComponent,
         RouterOutlet
+      ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: []
+        }
       ]
     })
     .compileComponents();
