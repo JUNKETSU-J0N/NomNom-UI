@@ -5,7 +5,7 @@ import { MatCardHeader, MatCard, MatCardContent } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatNavList, MatListItemIcon, MatListItem } from '@angular/material/list';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet, RouterLink, ActivatedRoute } from '@angular/router';
 
 describe('SidenavComponent', () => {
   let component: SidenavComponent;
@@ -27,6 +27,12 @@ describe('SidenavComponent', () => {
         MatListItemIcon,
         MatListItem,
         SidenavComponent
+      ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: []
+        }
       ]
     })
     .compileComponents();
