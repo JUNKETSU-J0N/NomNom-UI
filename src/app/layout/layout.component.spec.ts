@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LayoutComponent } from './layout.component';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 describe('LayoutComponent', () => {
   let component: LayoutComponent;
@@ -8,7 +11,18 @@ describe('LayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LayoutComponent]
+      imports: [
+        LayoutComponent,
+        ToolbarComponent,
+        SidenavComponent,
+        RouterOutlet
+      ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: []
+        }
+      ]
     })
     .compileComponents();
 
