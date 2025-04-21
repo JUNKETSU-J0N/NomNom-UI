@@ -1,1 +1,22 @@
-<p>{{greet}}</p>
+<div class="swipe-container">
+  <div class="card-container">
+    <div
+      class="card"
+      [@swipeAnimation]="animationState"
+      (panstart)="onPanStart($event)"
+      (panmove)="onPanMove($event)"
+      (panend)="onPanEnd($event)"
+      [style.transform]="currentTransform"
+    >
+      <div class="card-content">
+        <h2>Swipe me!</h2>
+        <p>Left or right</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button (click)="swipeLeft()">👎</button>
+    <button (click)="swipeRight()">👍</button>
+  </div>
+</div>
