@@ -1,11 +1,15 @@
-import { ApplicationConfig, provideZoneChangeDetection, isDevMode } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+  isDevMode,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideServiceWorker } from '@angular/service-worker';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { MyHammerConfig } from './hammer.config';
+// import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+// import { MyHammerConfig } from './hammer.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,11 +18,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
-    {
-      provide: HAMMER_GESTURE_CONFIG,
-      useClass: MyHammerConfig
-    }
-  ]
+    // {
+    //   provide: HAMMER_GESTURE_CONFIG,
+    //   useClass: MyHammerConfig
+    // }
+  ],
 };
