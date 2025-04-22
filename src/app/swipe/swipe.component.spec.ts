@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { SwipeComponent } from './swipe.component';
 
 describe('SwipeComponent', () => {
@@ -8,7 +8,7 @@ describe('SwipeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SwipeComponent]
+    imports: [SwipeComponent, provideAnimationsAsync]
     })
     .compileComponents();
 
