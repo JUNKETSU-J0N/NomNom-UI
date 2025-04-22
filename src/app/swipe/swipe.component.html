@@ -1,0 +1,28 @@
+<div class="swipe-container">
+  <div class="card-container">
+    <ng-container *ngFor="let card of visibleCards; let i = index">
+      <div
+        class="card"
+        #cardEl
+        [style.zIndex]="visibleCards.length - i"
+        [style.transform]="i === 0 ? currentTransform : 'scale(0.95) translateY(10px)'"
+        [class.top-card]="i === 0"
+        (pointerdown)="i === 0 && onPointerDown($event)"
+        (pointermove)="i === 0 && onPointerMove($event)"
+        (pointerup)="i === 0 && onPointerUp()"
+        (pointercancel)="i === 0 && onPointerUp()"
+        (pointerleave)="i === 0 && onPointerUp()"
+      >
+        <div class="card-content">
+          <h2>{{ card.title }}</h2>
+          <p>{{ card.desc }}</p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="buttons">
+    <button (click)="swipeLeft()">👎</button>
+    <button (click)="swipeRight()">👍</button>
+  </div>
+</div>
