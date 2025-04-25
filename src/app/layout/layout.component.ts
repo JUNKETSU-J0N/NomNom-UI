@@ -1,14 +1,12 @@
 import {Component, HostListener} from '@angular/core';
 import {ToolbarComponent} from './toolbar/toolbar.component';
 import {SidenavComponent} from './sidenav/sidenav.component';
-import {RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-layout',
   imports: [
     ToolbarComponent,
     SidenavComponent,
-    RouterOutlet
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'

@@ -1,0 +1,21 @@
+#card-left {
+    width: 49%;
+    float: left;
+    height: 200px;
+    margin-bottom: 10px;
+    overflow: scroll;
+}
+
+#card-right {
+    width: 49%;
+    float: right;
+    height: 200px;
+    margin-bottom: 10px;
+    overflow: scroll;
+}
+
+#card-bottom {
+    width: 100%;
+    align-self: center;
+    height: 280px;
+}

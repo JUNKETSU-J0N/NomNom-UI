@@ -2,10 +2,11 @@ import {Component, Input} from '@angular/core';
 import {MatListItem, MatListItemIcon, MatNavList} from '@angular/material/list';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {MatCard, MatCardContent, MatCardHeader} from '@angular/material/card';
-import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
+import {NavigationEnd, Router, RouterLink, RouterOutlet, RouterLinkActive} from '@angular/router';
 import {filter} from 'rxjs';
 import {MatIcon} from '@angular/material/icon';
 import {CommonModule} from '@angular/common';
+import {MatChipsModule} from '@angular/material/chips';
 
 @Component({
   selector: 'app-sidenav',
@@ -20,10 +21,12 @@ import {CommonModule} from '@angular/common';
     MatCardContent,
     RouterOutlet,
     RouterLink,
+    RouterLinkActive,
     MatIcon,
     MatListItemIcon,
     MatListItem,
-    CommonModule
+    CommonModule,
+    MatChipsModule
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
@@ -34,13 +37,16 @@ export class SidenavComponent {
   currentRoute: string = '';
 
   menuItems = [
-    {icon: 'home', label: 'Home', route: '/swipe'},
-    {icon: 'chef_hat', label: 'MyRecepies', route: '/gangs'},
-    {icon: 'lunch_dining', label: 'History', route: '/history'},
-    {icon: 'cards_star', label: 'FoodMatch', route: '/events'},
-    {icon: 'help', label: 'Help', route: '/help'},
-    {icon: 'settings', label: 'Settings', route: '/settings'}
+    {icon: 'home', label: 'Start', route: '/home'},
+    {icon: 'star', label: 'FoodMatch', route: '/swipe'},
+    {icon: 'restaurant', label: 'Rezepte', route: '/myrecipes'},
+    {icon: 'list', label: 'Liste', route: '/list'},
+    {icon: 'history', label: 'Verlauf', route: '/history'},
+    {icon: 'help', label: 'Hilfe', route: '/help'},
+    {icon: 'settings', label: 'Einstellungen', route: '/settings'},
+    {icon: 'email', label: 'Impressum', route: '/impressum'},
   ];
+  // nette icons: lunch_dining fastfood
 
   constructor(private router: Router) {
     // Update the route display after a successful navigation

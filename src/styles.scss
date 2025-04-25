@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @use "@angular/material" as mat;
-@import "./app/themes/nummereinstheme.css";
+//@import "./app/themes/nummereinstheme.css";
+//das oben erstmal ignorieren, irgendwann passen die farben auch ;-; 
+//oder ich bau später mal ein gutes eigenes theme, erstmal sollte das main lila reichen
 
 @include mat.core();
 
@@ -10,3 +12,37 @@ body {
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
+
+html {
+  @include mat.theme((
+    color-scheme: light,
+    color: (
+        primary: mat.$violet-palette,
+        tertiary: mat.$green-palette,
+        theme-type: light,
+    ),
+    typography: Roboto,
+    density: 0
+  ));
+
+  @include mat.sidenav-overrides((
+    container-background-color: var(--mat-sys-primary-container),
+  ));
+
+  @include mat.toolbar-overrides((
+    container-background-color: var(--mat-sys-primary),
+  ));
+
+  @include mat.chips-overrides((
+    elevated-container-color: var(--mat-sys-tertiary-container),
+    outline-color: var(--mat-sys-tertiary-container),
+    label-text-color: var(--mat-sys-on-tertiary-container),
+    focus-outline-color: var(--mat-sys-on-tertiary-variant),
+  ));
+
+  @include mat.expansion-overrides((
+    container-background-color: var(--mat-sys-surface-container),
+  ))
+
+}
+

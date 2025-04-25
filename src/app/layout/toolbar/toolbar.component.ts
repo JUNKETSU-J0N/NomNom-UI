@@ -1,12 +1,11 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {MatToolbar, MatToolbarRow} from '@angular/material/toolbar';
+import {MatToolbar} from '@angular/material/toolbar';
 import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-toolbar',
   imports: [
-    MatToolbarRow,
     MatToolbar,
     MatIcon,
     MatIconButton
