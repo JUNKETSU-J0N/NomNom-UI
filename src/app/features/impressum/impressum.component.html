@@ -1,0 +1,25 @@
+<p>Diese Projekt wurde im Rahmen des Kurses "Fallstudie Software-Engineering" entwickelt.</p>
+
+<mat-accordion multi>
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>GitHub Projektlinks</mat-panel-title>
+            <mat-icon>event_note</mat-icon>
+        </mat-expansion-panel-header>
+        <app-linkbutton [link]="'https://github.com/JUNKETSU-J0N/NomNom-UI'" [text]="'Frontend'"></app-linkbutton>
+        <app-linkbutton [link]="'https://github.com/JUNKETSU-J0N/NomNom-WS'" [text]="'Backend'"></app-linkbutton>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Technische Zusammensetzung</mat-panel-title>
+            <mat-icon>flight</mat-icon>
+        </mat-expansion-panel-header>
+        <app-linkbutton [link]="'https://angular.dev/'" [text]="'Angular 19'"></app-linkbutton>
+        <app-linkbutton [link]="'https://material.angular.io/'" [text]="'Material 3'"></app-linkbutton>
+        <app-linkbutton [link]="'https://www.postgresql.org/'" [text]="'PostgresSQL'"></app-linkbutton>
+        <app-linkbutton [link]="'https://github.com/flyway/flyway'" [text]="'Flyway'"></app-linkbutton>
+        <app-linkbutton [link]="'https://www.keycloak.org/'" [text]="'Keycloak'"></app-linkbutton>
+        <app-linkbutton [link]="'https://www.docker.com/'" [text]="'Docker'"></app-linkbutton>
+    </mat-expansion-panel>
+</mat-accordion>

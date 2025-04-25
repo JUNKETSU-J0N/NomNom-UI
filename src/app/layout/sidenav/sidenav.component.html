@@ -1,8 +1,8 @@
 <mat-sidenav-container class="idk">
-  <mat-sidenav [opened]="opened" [mode]="mode" [style.width]="'200px'" [style.margin-top]="'10px'" [style.margin-bottom]="'10px'">
+  <mat-sidenav [opened]="opened" [mode]="mode" [style.width]="'215px'" [style.margin-top]="'10px'" [style.margin-bottom]="'10px'">
     <mat-nav-list>
       <ng-container *ngFor="let item of menuItems; trackBy: trackByFn">
-        <a mat-list-item [routerLink]="item.route">
+        <a mat-list-item [routerLink]="item.route" routerLinkActive="active-link" class="sidenav-items">
           <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
           <span>{{ item.label }}</span>
         </a>
@@ -12,9 +12,11 @@
 
   <mat-sidenav-content>
     <div style="margin: 10px">
-      <mat-card class="example-card idk" appearance="outlined">
+      <mat-card class="example-card idk" appearance="raised">
         <mat-card-header>
-          <span>{{ currentRoute }}</span>
+          <span>Geöffneter Pfad: 
+            <mat-chip class="route-chip">{{ currentRoute }}</mat-chip>
+          </span>
         </mat-card-header>
         <mat-card-content>
           <router-outlet></router-outlet>
