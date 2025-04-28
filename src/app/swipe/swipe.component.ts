@@ -1,29 +1,31 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnimationBuilder, animate, style } from '@angular/animations';
+import {RecipeService} from '../shared/services/recipe.service';
+import {Recipe} from '../core/models/recipe.model';
 
 @Component({
   selector: 'app-swipe',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,],
+  providers: [RecipeService],
   templateUrl: './swipe.component.html',
   styleUrl: './swipe.component.scss',
 })
-export class SwipeComponent {
+export class SwipeComponent implements OnInit{
   @ViewChild('cardEl', { static: false }) cardEl!: ElementRef;
 
-  cards = [
-    { title: 'Salat', desc: 'Mit Thunfisch' },
-    { title: 'Müsli', desc: 'Apfel Zimt' },
-    { title: 'Salat', desc: 'Mit Oliven' },
-  ];
+  cards: Recipe[] = [];
   currentIndex              = 0;
   currentTransform          = '';
   private startX            = 0;
   private currentX          = 0;
   private isDragging        = false;
 
-  constructor(private builder: AnimationBuilder) {}
+  constructor(
+    private builder: AnimationBuilder,
+    private recipeService: RecipeService
+  ) {}
 
   get visibleCards() {
     return this.cards.slice(this.currentIndex, this.currentIndex + 2);
@@ -114,5 +116,11 @@ export class SwipeComponent {
       player.destroy();
       this.currentTransform = '';
     });
+  }
+
+  ngOnInit(): void {
+    this.recipeService.getAllRecipes().subscribe((recipes) => {
+      this.cards = recipes
+    })
   }
 }

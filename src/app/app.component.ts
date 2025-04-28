@@ -6,7 +6,11 @@ import { SwipeComponent } from './swipe/swipe.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, SwipeComponent, LayoutComponent],
+  imports: [
+    CommonModule,
+    SwipeComponent,
+    LayoutComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
