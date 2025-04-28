@@ -8,4 +8,18 @@
       <span class="title"> NomNom</span>
     </a>
   </div>
+
+
+    <span class="example-spacer"></span>
+
+    <a mat-icon-button [matMenuTriggerFor]="menu" class="accountbutton">
+      <mat-icon>account_circle</mat-icon>
+    </a>
 </mat-toolbar>
+
+
+<!--das menu-->
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="editProfile()">Profil bearbeiten</button>
+  <button mat-menu-item (click)="logout()">Abmelden</button>
+</mat-menu>

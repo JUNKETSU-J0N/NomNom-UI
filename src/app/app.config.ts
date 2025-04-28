@@ -1,21 +1,29 @@
 import {
   ApplicationConfig,
   provideZoneChangeDetection,
-  isDevMode,
+  isDevMode, provideAppInitializer, inject,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {provideRouter} from '@angular/router';
 
-import { routes } from './app.routes';
-import { provideServiceWorker } from '@angular/service-worker';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import {routes} from './app.routes';
+import {provideServiceWorker} from '@angular/service-worker';
+import {provideAnimations} from '@angular/platform-browser/animations';
+import Keycloak from 'keycloak-js';
+import {KeycloakService} from './utils/keycloak/keycloak.service';
 // import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 // import { MyHammerConfig } from './hammer.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes),
+    provideAppInitializer(() => {
+      const initFn = ((key: KeycloakService) => {
+        return () => key.init()
+      })(inject(KeycloakService));
+      return initFn();
+    }),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
