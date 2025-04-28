@@ -7,7 +7,6 @@ import {filter} from 'rxjs';
 import {MatIcon} from '@angular/material/icon';
 import {CommonModule} from '@angular/common';
 import {MatChipsModule} from '@angular/material/chips';
-import {KeycloakService} from '../../utils/keycloak/keycloak.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -51,7 +50,6 @@ export class SidenavComponent {
 
   constructor(
     private router: Router,
-    private keycloakService: KeycloakService
   ) {
     // Update the route display after a successful navigation
     this.router.events.pipe(
@@ -59,18 +57,10 @@ export class SidenavComponent {
     ).subscribe((event: NavigationEnd) => {
       this.currentRoute = event.urlAfterRedirects.replace('/', '') || 'Home';
     });
-}
-
-trackByFn(index: number, item: any): number {
-  return index;
-}
-
-  logout() {
-    this.keycloakService.logout() .then(() => console.log('Logout erfolgreich'))
-      .catch(err => console.error('Logout fehlgeschlagen', err));
   }
 
-  editProfile() {
-    this.keycloakService.accountManagement();
+  trackByFn(index: number, item: any): number {
+    return index;
   }
+
 }
