@@ -14,7 +14,7 @@ table {
   /* Header */
   th {
     background-color: var(--mat-sys-primary); 
-    color: var(--mat-sys-primary-fixed);
+    color: var(--mat-sys-on-primary);
     padding: 10px;
     text-align: left;
     font-weight: bold;
@@ -43,12 +43,20 @@ table {
   
   /* Link */
   a {
-    color: var(--mat-sys-secondary);
+    color: var(--mat-sys-tertiary);
   }
 
   /* Link hover */
   a:hover {
     color: var(--mat-sys-primary);
     text-decoration: underline;
+  }
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .paginator{
+    float: right;
   }
   
