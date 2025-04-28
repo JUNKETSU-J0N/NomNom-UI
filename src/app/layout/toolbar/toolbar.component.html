@@ -1,10 +1,11 @@
 <mat-toolbar class="mat-elevation-z16">
-    <div class="container">
-      
-        <button mat-icon-button (click)="toggle.emit()">
-          <mat-icon>menu</mat-icon>
-      </button>
-      <span>NomNom</span>
-      
-    </div>
+  <div class="container">
+    <button mat-icon-button (click)="toggle.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a href="/home" class="logo-link">
+      <img src="/logo.png" alt="NomNom Logo" class="logo">
+      <span class="title"> NomNom</span>
+    </a>
+  </div>
 </mat-toolbar>
