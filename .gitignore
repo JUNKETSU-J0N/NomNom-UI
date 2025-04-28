@@ -40,4 +40,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-karma.conf.js
+# karma.conf.js 
+# standardmäßig hier? aber wir brauchen die doch
