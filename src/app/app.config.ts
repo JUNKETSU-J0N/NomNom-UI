@@ -8,13 +8,14 @@ import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
 import {provideServiceWorker} from '@angular/service-worker';
 import {provideAnimations} from '@angular/platform-browser/animations';
-import Keycloak from 'keycloak-js';
 import {KeycloakService} from './utils/keycloak/keycloak.service';
+import {provideHttpClient} from '@angular/common/http';
 // import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 // import { MyHammerConfig } from './hammer.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
     provideAnimations(),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes),
