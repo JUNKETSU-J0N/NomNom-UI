@@ -14,6 +14,8 @@ describe('LinkbuttonComponent', () => {
 
     fixture = TestBed.createComponent(LinkbuttonComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('text', 'super text'); 
+    fixture.componentRef.setInput('link', 'https://github.com/JUNKETSU-J0N/NomNom-WS'); 
     fixture.detectChanges();
   });
 
