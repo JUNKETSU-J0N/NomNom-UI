@@ -1,0 +1,54 @@
+
+table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    margin: 20px 0;
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-secondary);
+    overflow: hidden;
+}
+  
+  /* Header */
+  th {
+    background-color: var(--mat-sys-primary); 
+    color: var(--mat-sys-primary-fixed);
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid var(--mat-sys-primary-fixed);
+  }
+  
+  /* Zellen */
+  td {
+    padding: 10px;
+    border-bottom: 1px solid var(--mat-sys-primary-fixed-dim);
+    text-align: left;
+  }
+
+  td:first-child {
+    width: auto;
+  }
+
+  td:last-child {
+    width: 1;
+  }
+  
+  /* Hover-Effekt für Zeilen */
+  tr:hover {
+    background-color: var(--mat-sys-primary-fixed-dim);
+  }
+  
+  /* Link */
+  a {
+    color: var(--mat-sys-secondary);
+  }
+
+  /* Link hover */
+  a:hover {
+    color: var(--mat-sys-primary);
+    text-decoration: underline;
+  }
+  
