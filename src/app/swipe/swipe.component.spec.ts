@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SwipeComponent } from './swipe.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import {provideHttpClient} from '@angular/common/http';
 
 describe('SwipeComponent', () => {
   let component: SwipeComponent;
@@ -9,7 +10,10 @@ describe('SwipeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
     imports: [SwipeComponent],
-    providers: [provideAnimations()],
+    providers: [
+      provideAnimations(),
+      provideHttpClient()
+    ],
     })
     .compileComponents();
 
