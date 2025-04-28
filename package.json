@@ -22,6 +22,8 @@
     "@angular/router": "^19.2.5",
     "@angular/service-worker": "^19.2.5",
     "hammerjs": "^2.0.8",
+    "keycloak-angular": "^19.0.2",
+    "keycloak-js": "^26.1.5",
     "nom-nom-ui": "file:",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

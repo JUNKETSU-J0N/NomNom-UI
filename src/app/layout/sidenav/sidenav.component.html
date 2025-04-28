@@ -7,6 +7,15 @@
           <span>{{ item.label }}</span>
         </a>
       </ng-container>
+      <a mat-list-item (click)="editProfile()" class="sidenav-items">
+        <mat-icon matListItemIcon>account_circle</mat-icon>
+        <span>Edit Profile</span>
+      </a>
+      <a mat-list-item (click)="logout()" class="sidenav-items">
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span>logout</span>
+      </a>
+
     </mat-nav-list>
   </mat-sidenav>
 
@@ -14,7 +23,7 @@
     <div style="margin: 10px">
       <mat-card class="content-card" appearance="raised">
         <mat-card-header>
-          <span>Geöffneter Pfad: 
+          <span>Geöffneter Pfad:
             <mat-chip class="route-chip">{{ currentRoute }}</mat-chip>
           </span>
         </mat-card-header>
