@@ -1,0 +1,19 @@
+.checked {
+    opacity: 0.5;
+    text-decoration: line-through;
+  }
+
+  .section {
+    margin-bottom: 2rem;
+  }
+  
+  .divider {
+    margin: 2rem 0;
+    border-top: 1px solid #ccc;
+  }
+  .filter-fields {
+    display: flex;
+    gap: 1.5rem; 
+    flex-wrap: wrap; 
+    margin-left: 30px;
+  }

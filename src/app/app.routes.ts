@@ -7,7 +7,7 @@ import { HelppageComponent } from './features/helppage/helppage.component';
 import { HistoryComponent } from './features/history/history.component';
 import { SettingsComponent } from './features/settings/settings.component';
 import { MyrecipesComponent } from './features/myrecipes/myrecipes.component';
-import { ShoppinglistComponent } from './features/shoppinglist/shoppinglist.component';
+import { ShoppingListComponent } from './features/shoppinglist/shoppinglist.component';
 
 export const routes: Routes = [
   {
@@ -37,7 +37,7 @@ export const routes: Routes = [
   },
   {
     path: 'list',
-    component: ShoppinglistComponent
+    component: ShoppingListComponent
   },
   {
     path: 'settings',
