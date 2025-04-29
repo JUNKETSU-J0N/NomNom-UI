@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpService} from '../../core/services/http.service';
 import { Observable } from 'rxjs';
+import {Recipe} from "../../core/models/recipe.model";
+import { HttpParams } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +32,10 @@ export class RecipeService {
 
   deleteRecipe(id: string): Observable<any> {
     return this.httpService.delete(`${this.route}/${id}`);
+  }
+
+  searchRecipes(query: string): Observable<Recipe[]> {
+    const params = new HttpParams().set('searchTerm', query);
+    return this.httpService.get<Recipe[]>(this.route + '/search', { params });
   }
 }

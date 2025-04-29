@@ -1,3 +1,60 @@
+.search-form {
+  margin-bottom: 16px;
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.search-field {
+  flex: 1;
+  min-width: 250px;
+
+  height: 56px;
+  display: flex;
+  align-items: center;
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+    height: 56px;
+    display: flex;
+    align-items: center;
+  }
+
+.mat-form-field-infix {
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+  }
+
+  .mat-form-field-input {
+    margin: 0 !important;
+    padding: 0 8px !important;
+    height: 100% !important;
+  }
+}
+
+.search-button {
+  height: 56px;
+  white-space: nowrap;
+  padding: 0 16px;
+}
+
+.search-paginator {
+  display: flex;
+  align-items: center;
+  height: 56px;
+
+  .mat-paginator-container {
+    height: 100%;
+    align-items: center;
+    padding: 0;
+  }
+}
+
 
 table {
     width: 100%;
@@ -7,20 +64,20 @@ table {
     border-radius: 10px;
     margin: 20px 0;
     background-color: var(--mat-sys-primary-container);
-    color: var(--mat-sys-secondary);
+    color: var(--mat-sys-on-surface);
     overflow: hidden;
 }
-  
+
   /* Header */
   th {
-    background-color: var(--mat-sys-primary); 
-    color: var(--mat-sys-on-primary);
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-surface);
     padding: 10px;
     text-align: left;
     font-weight: bold;
-    border-bottom: 2px solid var(--mat-sys-primary-fixed);
+    border-bottom: 3px solid var(--mat-sys-on-primary-fixed);
   }
-  
+
   /* Zellen */
   td {
     padding: 10px;
@@ -33,17 +90,17 @@ table {
   }
 
   td:last-child {
-    width: 1;
+    width: auto;
   }
-  
+
   /* Hover-Effekt für Zeilen */
   tr:hover {
     background-color: var(--mat-sys-primary-fixed-dim);
   }
-  
+
   /* Link */
   a {
-    color: var(--mat-sys-tertiary);
+    color: var(--mat-sys-on-surface);
   }
 
   /* Link hover */
@@ -59,4 +116,17 @@ table {
   .paginator{
     float: right;
   }
-  
+
+.col-name {
+  width: 30%;
+  max-width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.col-description {
+  width: 70%;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

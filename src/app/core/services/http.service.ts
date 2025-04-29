@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {environment} from '../../../environments/environment';
 
@@ -12,8 +12,8 @@ export class HttpService {
 
   constructor(private http: HttpClient) { }
 
-  get<T>(route: string, params?: any): Observable<T> {
-    return this.http.get<T>(`${this.baseUrl}/${route}`, { params });
+  get<T>(route: string, options?: { params?: HttpParams }): Observable<T> {
+    return this.http.get<T>(`${this.baseUrl}/${route}`, options);
   }
 
   post<T>(route: string, body: any): Observable<T> {
