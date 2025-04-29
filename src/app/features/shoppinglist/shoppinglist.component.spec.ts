@@ -8,7 +8,10 @@ describe('ShoppingListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShoppingListComponent]
+      imports: [ShoppingListComponent],
+      providers:[
+        provideHttpClient()
+      ]
     })
     .compileComponents();
 
