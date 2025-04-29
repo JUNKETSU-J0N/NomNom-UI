@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ShoppingListService } from '../services/shopping-list.service';
+import { ShoppingListService } from '../../shared/services/shopping-list.service';
 import { ShoppingList } from '../models/shopping-list.model';
 import { ShoppingItem } from '../models/shopping-item.model';
 import { Ingredient } from '../models/ingredient.model';
@@ -20,34 +20,46 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import {
+  MatAccordion,
+  MatExpansionPanel,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle
+} from '@angular/material/expansion';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-shoppinglist',
   standalone: true,
-  imports: [FormsModule, 
-    CommonModule,   
+  imports: [FormsModule,
+    CommonModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,  
+    MatButtonModule,
     MatTableModule,
     MatCheckboxModule,
     MatSelectModule,
     MatPaginatorModule,
-    MatSortModule],
+    MatSortModule,
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatIcon],
 
   templateUrl: './shoppinglist.component.html',
-  styleUrls: ['./shoppinglist.component.scss']
+  styleUrls: ['./shoppinglist.component.scss'],
 })
 export class ShoppingListComponent implements OnInit , AfterViewInit
 {
-  
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<ShoppingItem>();
 
   shoppingList: ShoppingList | null = null;
-  
+
   // Für neue Items
   newIngredientName: string = '';
   newAmount: number = 1;
@@ -73,13 +85,13 @@ export class ShoppingListComponent implements OnInit , AfterViewInit
   applyFilter(): void {
     const name = this.filterName.trim().toLowerCase();
     const type = this.filterType.trim().toLowerCase();
-  
+
     this.dataSource.filterPredicate = (data: ShoppingItem, filter: string) => {
       const [nameFilter, typeFilter] = filter.split('|');
       return data.ingredient.name.toLowerCase().includes(nameFilter) &&
              data.ingredient.type?.toLowerCase().includes(typeFilter);
     };
-  
+
     this.dataSource.filter = `${name}|${type}`;
   }
 
@@ -141,13 +153,13 @@ export class ShoppingListComponent implements OnInit , AfterViewInit
       next: () => this.loadShoppingList(),
       error: (err) => console.error('Fehler beim Updaten', err)
     })
-    
+
   }
 
   getUnitLabel(unit: string): string {
     return this.unitEnum[unit as keyof typeof this.unitEnum] ?? unit;
   }
-  
+
   getTypeLabel(type: string): string {
     return this.typeEnum[type as keyof typeof this.typeEnum] ?? type;
   }
