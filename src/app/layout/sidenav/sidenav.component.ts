@@ -48,16 +48,19 @@ export class SidenavComponent {
   ];
   // nette icons: lunch_dining fastfood
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+  ) {
     // Update the route display after a successful navigation
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.currentRoute = event.urlAfterRedirects.replace('/', '') || 'Home';
     });
-}
+  }
 
-trackByFn(index: number, item: any): number {
-  return index;
-}
+  trackByFn(index: number, item: any): number {
+    return index;
+  }
+
 }
