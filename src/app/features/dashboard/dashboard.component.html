@@ -1,45 +1,25 @@
-<h4>Hallo {{ name }}</h4>
 
 <div class="card-box">
-    <mat-card id="card-left">
-        <mat-card-header>
-            <mat-card-title>
-                Erste Karte
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            gaaaaaaaaaanz viel text und so - mehr als hier in eine Zeile passen würde, aber das muss man ja mal ausprobieren
-        </mat-card-content>
-    </mat-card>
+  <mat-card id="card-left" class="hover-card" (click)="navigateTo('swipe')">
+    <img mat-card-image src="images/essen2.jpg" alt="Essen finden" />
+    <mat-card-content>
+      <p>Lass uns was zum Essen finden</p>
+    </mat-card-content>
+  </mat-card>
 
-    <mat-card id="card-right">
-        <mat-card-header>
-            <mat-card-title>
-                Karte mit super wichtigen Informationen
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-            ut labore et dolore magna aliquyam erat, sed diam voluptua.
-            At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-            gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-        </mat-card-content>
-    </mat-card>
+  <mat-card id="card-right" class="hover-card" (click)="navigateTo('list')">
+    <img mat-card-image src="images/einkauf3.png" alt="Einkaufsliste" />
+    <mat-card-content>
+      <p>Einkaufsliste erstellen</p>
+    </mat-card-content>
+  </mat-card>
 </div>
 
 <div class="card-box">
-    <mat-card id="card-bottom">
-        <mat-card-content>
-            hi hier ist noch nichts
-        </mat-card-content>
-    </mat-card>
+  <mat-card id="card-bottom" class="hover-card" (click)="navigateTo('myrecipes')">
+    <img mat-card-image src="images/rezept4.png" alt="Rezepte entdecken" />
+    <mat-card-content>
+      <p>Rezepte entdecken</p>
+    </mat-card-content>
+  </mat-card>
 </div>
