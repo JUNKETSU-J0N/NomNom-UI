@@ -7,7 +7,7 @@ import { HistoryComponent } from './features/history/history.component';
 import { SettingsComponent } from './features/settings/settings.component';
 import { MyrecipesComponent } from './features/myrecipes/myrecipes.component';
 import { ShoppingListComponent } from './features/shoppinglist/shoppinglist.component';
-import { RecipeDetailPlaceholderComponent } from './features/recipe-detail-placeholder/recipe-detail-placeholder.component';
+import { RecipeDetailComponent } from './features/recipe-detail/recipe-detail.component';
 
 export const routes: Routes = [
   {
@@ -47,10 +47,9 @@ export const routes: Routes = [
     path: 'myrecipes',
     component: MyrecipesComponent
   },
-  //placeholder für rezeptansicht:
   {
     path: 'recipe/:id',
-    component: RecipeDetailPlaceholderComponent
+    component: RecipeDetailComponent
   },
   { // wildcard route, alles was nicht definiert ist und eingegeben wird, führt wieder zu home
     path: '**', redirectTo: 'home'
