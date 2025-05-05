@@ -1,18 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShoppinglistComponent } from './shoppinglist.component';
+import { ShoppingListComponent } from './shoppinglist.component';
+import {provideHttpClient} from '@angular/common/http';
 
-describe('ShoppinglistComponent', () => {
-  let component: ShoppinglistComponent;
-  let fixture: ComponentFixture<ShoppinglistComponent>;
+describe('ShoppingListComponent', () => {
+  let component: ShoppingListComponent;
+  let fixture: ComponentFixture<ShoppingListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ShoppinglistComponent]
+      imports: [ShoppingListComponent],
+      providers:[
+        provideHttpClient()
+      ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ShoppinglistComponent);
+    fixture = TestBed.createComponent(ShoppingListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

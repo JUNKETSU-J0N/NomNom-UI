@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-
 import { SwipeComponent } from './swipe/swipe.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ImpressumComponent } from './features/impressum/impressum.component';
@@ -7,7 +6,7 @@ import { HelppageComponent } from './features/helppage/helppage.component';
 import { HistoryComponent } from './features/history/history.component';
 import { SettingsComponent } from './features/settings/settings.component';
 import { MyrecipesComponent } from './features/myrecipes/myrecipes.component';
-import { ShoppinglistComponent } from './features/shoppinglist/shoppinglist.component';
+import { ShoppingListComponent } from './features/shoppinglist/shoppinglist.component';
 import { RecipeDetailPlaceholderComponent } from './features/recipe-detail-placeholder/recipe-detail-placeholder.component';
 
 export const routes: Routes = [
@@ -38,7 +37,7 @@ export const routes: Routes = [
   },
   {
     path: 'list',
-    component: ShoppinglistComponent
+    component: ShoppingListComponent
   },
   {
     path: 'settings',
@@ -52,7 +51,7 @@ export const routes: Routes = [
   {
     path: 'recipe/:id',
     component: RecipeDetailPlaceholderComponent
-  },  
+  },
   { // wildcard route, alles was nicht definiert ist und eingegeben wird, führt wieder zu home
     path: '**', redirectTo: 'home'
   }
