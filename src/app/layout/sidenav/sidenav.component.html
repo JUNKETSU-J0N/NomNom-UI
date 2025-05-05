@@ -13,11 +13,13 @@
   <mat-sidenav-content>
     <div style="margin: 10px">
       <mat-card class="content-card" appearance="raised">
-        <mat-card-header>
+        @if (currentRoute != "home") {
+          <mat-card-header>
           <span>Geöffneter Pfad:
             <mat-chip class="route-chip">{{ currentRoute }}</mat-chip>
           </span>
-        </mat-card-header>
+          </mat-card-header>
+        }
         <mat-card-content>
           <router-outlet></router-outlet>
         </mat-card-content>
