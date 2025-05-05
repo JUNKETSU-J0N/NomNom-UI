@@ -8,7 +8,33 @@
 
 html, body { height: 100%; }
 
+$light-theme: mat.define-theme((
+  color: (
+    primary: mat.$violet-palette,
+    tertiary: mat.$green-palette,
+    theme-type: light,
+  ),
+));
+
+$dark-theme: mat.define-theme((
+  color: (
+    primary: mat.$violet-palette,
+    tertiary: mat.$green-palette,
+    theme-type: dark,
+  ),
+));
+
+html.theme-light {
+  @include mat.all-component-themes($light-theme);
+}
+
+html.theme-dark {
+  @include mat.all-component-themes($dark-theme);
+}
+
 body { 
+    background-color: var(--mat-sys-background);
+    color: var(--mat-sys-on-background);
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
