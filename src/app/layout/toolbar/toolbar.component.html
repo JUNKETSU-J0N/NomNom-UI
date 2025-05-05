@@ -12,6 +12,10 @@
 
     <span class="example-spacer"></span>
 
+    <button mat-icon-button (click)="toggleTheme()">
+      <mat-icon>{{ isDarkTheme ? 'dark_mode' : 'light_mode' }}</mat-icon>
+    </button>
+
     <a mat-icon-button [matMenuTriggerFor]="menu" class="accountbutton">
       <mat-icon>account_circle</mat-icon>
     </a>
