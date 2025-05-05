@@ -14,28 +14,40 @@ export class RecipeService {
 
   constructor(private httpService: HttpService) { }
 
-  getAllRecipes(): Observable<any[]> {
-    return this.httpService.get<any[]>(this.route);
+  getAllRecipes(): Observable<Recipe[]> {
+    return this.httpService.get<Recipe[]>(this.route);
   }
 
-  getRecipeById(id: string): Observable<any> {
-    return this.httpService.get<any>(`${this.route}/${id}`);
+  getRecipeById(id: string): Observable<Recipe> {
+    return this.httpService.get<Recipe>(`${this.route}/${id}`);
   }
 
-  createRecipe(recipe: any): Observable<any> {
+  createRecipe(recipe: Recipe): Observable<Recipe> {
     return this.httpService.post(this.route, recipe);
   }
 
-  updateRecipe(id: string, recipe: any): Observable<any> {
+  updateRecipe(id: string, recipe: Recipe): Observable<Recipe> {
     return this.httpService.put(`${this.route}/${id}`, recipe);
   }
 
-  deleteRecipe(id: string): Observable<any> {
+  deleteRecipe(id: string): Observable<Recipe> {
     return this.httpService.delete(`${this.route}/${id}`);
   }
 
   searchRecipes(query: string): Observable<Recipe[]> {
     const params = new HttpParams().set('searchTerm', query);
     return this.httpService.get<Recipe[]>(this.route + '/search', { params });
+  }
+
+  getAllRecipesShuffled(): Observable<Recipe[]> {
+    return this.httpService.get<Recipe[]>(this.route + '/shuffled');
+  }
+
+  resetRecipes(): Observable<Recipe[]> {
+    return this.httpService.get<Recipe[]>(this.route + '/reset');
+  }
+
+  hardResetRecipes(): Observable<Recipe[]> {
+    return this.httpService.get<Recipe[]>(this.route + '/hard-reset');
   }
 }

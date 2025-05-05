@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import { SwipeComponent } from './swipe/swipe.component';
+import { SwipeComponent } from './features/swipe/swipe.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { ImpressumComponent } from './features/impressum/impressum.component';
 import { HelppageComponent } from './features/helppage/helppage.component';
