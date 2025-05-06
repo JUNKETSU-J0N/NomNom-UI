@@ -12,15 +12,20 @@ describe('RecipeDetailComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RecipeDetailComponent],
-      providers:[
+      providers: [
         provideHttpClient(),
         {
           provide: ActivatedRoute,
-          useValue: []
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: (key: string) => '1'
+              }
+            }
+          }
         }
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(RecipeDetailComponent);
     component = fixture.componentInstance;
