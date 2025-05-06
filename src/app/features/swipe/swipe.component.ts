@@ -7,6 +7,7 @@ import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
 import {EvaluationService} from '../../shared/services/evaluation.service';
 import {EvaluationValue} from '../../core/enums/EvaluationValue';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-swipe',
@@ -14,7 +15,8 @@ import {EvaluationValue} from '../../core/enums/EvaluationValue';
   imports: [
     CommonModule,
     MatIcon,
-    MatIconButton
+    MatIconButton,
+    MatProgressSpinner
   ],
   providers: [RecipeService, EvaluationService],
   templateUrl: './swipe.component.html',
@@ -23,6 +25,7 @@ import {EvaluationValue} from '../../core/enums/EvaluationValue';
 export class SwipeComponent implements OnInit {
   @ViewChild('cardEl', {static: false}) cardEl!: ElementRef;
 
+  private userID = 1;
   cards: Recipe[] = [];
   currentIndex = 0;
   currentTransform = '';
@@ -116,7 +119,7 @@ export class SwipeComponent implements OnInit {
 
   resetRecipes() {
     this.recipeService.resetRecipes();
-    this.recipeService.getAllRecipesShuffled().subscribe((recipes) => {
+    this.recipeService.getAllRecipesShuffled(this.userID).subscribe((recipes) => {
       this.cards = recipes
     })
   }
@@ -165,14 +168,14 @@ export class SwipeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipeService.getAllRecipesShuffled().subscribe((recipes) => {
+    this.recipeService.getAllRecipesShuffled(this.userID).subscribe((recipes) => {
       this.cards = recipes
     })
   }
 
   hardResetRecipes() {
     this.recipeService.hardResetRecipes();
-    this.recipeService.getAllRecipesShuffled().subscribe((recipes) => {
+    this.recipeService.getAllRecipesShuffled(this.userID).subscribe((recipes) => {
       this.cards = recipes
     })
   }

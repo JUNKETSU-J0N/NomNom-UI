@@ -38,9 +38,10 @@ export class RecipeService {
     const params = new HttpParams().set('searchTerm', query);
     return this.httpService.get<Recipe[]>(this.route + '/search', { params });
   }
+  getAllRecipesShuffled(userId: number): Observable<Recipe[]> {
+    const params = new HttpParams().set('userId', userId.toString());
 
-  getAllRecipesShuffled(): Observable<Recipe[]> {
-    return this.httpService.get<Recipe[]>(this.route + '/shuffled');
+    return this.httpService.get<Recipe[]>(this.route + '/shuffled', { params });
   }
 
   resetRecipes(): Observable<Recipe[]> {
