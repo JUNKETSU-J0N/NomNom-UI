@@ -11,9 +11,13 @@ describe('RecipeDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RecipeDetailComponent, ActivatedRoute],
+      imports: [RecipeDetailComponent],
       providers:[
-        provideHttpClient()
+        provideHttpClient(),
+        {
+          provide: ActivatedRoute,
+          useValue: []
+        }
       ]
     })
     .compileComponents();
