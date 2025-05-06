@@ -1,0 +1,30 @@
+.recipe-card {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.description {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+mat-list-item {
+  margin-bottom: 0.5rem;
+}
+
+.secondary {
+  font-size: 0.8rem;
+  color: rgba(0,0,0,0.6);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4rem;
+
+  p {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+  }
+}
