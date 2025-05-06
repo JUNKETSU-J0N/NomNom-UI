@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Unit } from '../models/unit.enum';
 
 import { RecipeService } from '../../shared/services/recipe.service';
 import { Recipe } from '../../core/models/recipe.model';
@@ -22,6 +23,7 @@ import { Recipe } from '../../core/models/recipe.model';
 })
 export class RecipeDetailComponent implements OnInit {
   recipe: Recipe | null = null;
+  unitEnum = Unit;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,5 +37,9 @@ export class RecipeDetailComponent implements OnInit {
         this.recipe = new Recipe(data.id, data.name, data.description, data.ingredients);
       });
     }
+  }
+
+  getUnitLabel(unit: string): string {
+    return this.unitEnum[unit as keyof typeof this.unitEnum] ?? unit;
   }
 }
