@@ -6,14 +6,14 @@ import {UserRecipeModel} from '../../core/models/userRecipe.model';
 @Injectable({
   providedIn: 'root'
 })
-export class EvaluationService {
+export class UserRecipeService {
 
-  private route = 'evaluation';
+  private route = 'userrecipe';
 
 
   constructor(private httpService: HttpService) { }
 
-  updateUserRecipe(userID:number , recipeID: number, userRecipe: UserRecipeModel): Observable<any> {
+    updateUserRecipe(userID: string, recipeID: number, userRecipe: UserRecipeModel): Observable<any> {
     return this.httpService.put(`${this.route}/${userID}/${recipeID}`, userRecipe);
   }
 

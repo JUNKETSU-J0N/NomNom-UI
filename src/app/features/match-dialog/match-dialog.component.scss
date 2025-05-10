@@ -1,0 +1,32 @@
+mat-form-field {
+  margin-left: 5px;
+  display: block;
+  margin-bottom: 10px;
+  --mat-sys-on-surface: white;
+}
+
+button {
+  margin-top: 10px;
+}
+
+h3 {
+  margin-top: 15px;
+  margin-left: 1rem;
+}
+p {
+  --text-color: var(--text-color);
+  margin-left: 1rem;
+}
+
+.dialog-container {
+  max-height: 80vh;  /* Limit the maximum height of the dialog to 80% of the viewport height */
+  overflow-y: auto;  /* Enable vertical scrolling if the content exceeds the max height */
+  --text-color: var(--text-color);
+
+}
+
+.dialog-content {
+  padding: 20px;  /* Add some padding to the content */
+  --text-color: var(--text-color);
+}
+

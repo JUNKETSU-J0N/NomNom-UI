@@ -38,7 +38,8 @@ export class RecipeService {
     const params = new HttpParams().set('searchTerm', query);
     return this.httpService.get<Recipe[]>(this.route + '/search', { params });
   }
-  getAllRecipesShuffled(userId: number): Observable<Recipe[]> {
+
+  getAllRecipesShuffled(userId: string): Observable<Recipe[]> {
     const params = new HttpParams().set('userId', userId.toString());
 
     return this.httpService.get<Recipe[]>(this.route + '/shuffled', { params });
@@ -50,5 +51,10 @@ export class RecipeService {
 
   hardResetRecipes(): Observable<Recipe[]> {
     return this.httpService.get<Recipe[]>(this.route + '/hard-reset');
+  }
+
+  checkMatch(userId: string) {
+    const params = new HttpParams().set('userId', userId.toString());
+    return this.httpService.get<Recipe[]>(`${this.route}/check-match`, { params });
   }
 }

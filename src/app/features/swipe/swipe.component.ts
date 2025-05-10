@@ -5,9 +5,12 @@ import {RecipeService} from '../../shared/services/recipe.service';
 import {Recipe} from '../../core/models/recipe.model';
 import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
-import {EvaluationService} from '../../shared/services/evaluation.service';
+import {UserRecipeService} from '../../shared/services/user-recipe.service';
 import {EvaluationValue} from '../../core/enums/EvaluationValue';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {KeycloakService} from '../../utils/keycloak/keycloak.service';
+import {MatDialog} from '@angular/material/dialog';
+import {MatchDialogComponent} from '../match-dialog/match-dialog.component';
 
 @Component({
   selector: 'app-swipe',
@@ -18,25 +21,29 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
     MatIconButton,
     MatProgressSpinner
   ],
-  providers: [RecipeService, EvaluationService],
+  providers: [RecipeService, UserRecipeService],
   templateUrl: './swipe.component.html',
   styleUrl: './swipe.component.scss',
 })
 export class SwipeComponent implements OnInit {
   @ViewChild('cardEl', {static: false}) cardEl!: ElementRef;
 
-  private userID = 1;
+  private actionCount = 0;
+  private userId: string = '1';
   cards: Recipe[] = [];
   currentIndex = 0;
   currentTransform = '';
   private startX = 0;
   private currentX = 0;
   private isDragging = false;
+  private matchedRecipes: Recipe[] = [];
 
   constructor(
     private builder: AnimationBuilder,
     private recipeService: RecipeService,
-    private evaluationService: EvaluationService
+    private userRecipeService: UserRecipeService,
+    private keycloakService: KeycloakService,
+    private dialog: MatDialog
   ) {
   }
 
@@ -71,14 +78,36 @@ export class SwipeComponent implements OnInit {
     const deltaX = this.currentX - this.startX;
     const threshold = 300;
 
+    const currentRecipe = this.cards[this.currentIndex];
+
     if (deltaX > threshold) {
-      this.swipeRight(deltaX);
+      // Rechts geswiped → Like
+      this.userRecipeService.updateUserRecipe(this.userId, currentRecipe.id, {
+        userId: this.userId,
+        recipeId: this.cards[this.currentIndex].id,
+        notes: '',
+        evaluation: EvaluationValue.LIKE
+      }).subscribe(() => {
+        this.swipeRight(deltaX);
+        this.incrementCounterAndCheckMatch();
+      });
+
     } else if (deltaX < -threshold) {
-      this.swipeLeft(deltaX);
+      // Links geswiped → Dislike
+      this.userRecipeService.updateUserRecipe(this.userId, currentRecipe.id, {
+        userId: this.userId,
+        recipeId: this.cards[this.currentIndex].id,
+        notes: '',
+        evaluation: EvaluationValue.DISLIKE
+      }).subscribe(() => {
+        this.swipeLeft(deltaX);
+        this.incrementCounterAndCheckMatch();
+      });
     } else {
       this.snapBack(deltaX);
     }
   }
+
 
   swipeLeft(fromX: number = 0) {
     this.animateSwipe(fromX, -1100);
@@ -93,33 +122,77 @@ export class SwipeComponent implements OnInit {
   }
 
   likeCard() {
-    this.evaluationService.updateUserRecipe(1, this.cards[this.currentIndex].id, {notes: '', evaluationValue: EvaluationValue.LIKE});
-    this.swipeRight();
+    this.userRecipeService.updateUserRecipe(this.userId, this.cards[this.currentIndex].id, {
+      userId: this.userId,
+      recipeId: this.cards[this.currentIndex].id,
+      notes: '',
+      evaluation: EvaluationValue.LIKE
+    }).subscribe(
+      () => {
+        this.swipeRight();
+        this.incrementCounterAndCheckMatch();
+      }
+    );
+    // this.swipeRight();
+    // this.incrementCounterAndCheckMatch();
   }
 
   dislikeCard() {
-    this.evaluationService.updateUserRecipe(1, this.cards[this.currentIndex].id, {notes: '', evaluationValue: EvaluationValue.DISLIKE});
-    this.swipeLeft();
+    this.userRecipeService.updateUserRecipe(this.userId, this.cards[this.currentIndex].id, {
+      userId: this.userId,
+      recipeId: this.cards[this.currentIndex].id,
+      notes: '',
+      evaluation: EvaluationValue.DISLIKE
+    }).subscribe(() => {
+      this.swipeLeft();
+      this.incrementCounterAndCheckMatch();
+    });
   }
 
   blockCard() {
-    this.evaluationService.updateUserRecipe(1, this.cards[this.currentIndex].id, {notes: '', evaluationValue: EvaluationValue.BLOCK});
-    this.swipeLeft();
+    this.userRecipeService.updateUserRecipe(this.userId, this.cards[this.currentIndex].id, {
+      userId: this.userId,
+      recipeId: this.cards[this.currentIndex].id,
+      notes: '',
+      evaluation: EvaluationValue.BLOCK
+    }).subscribe(() => {
+      this.swipeLeft();
+      this.incrementCounterAndCheckMatch();
+    });
   }
 
   markNeutral() {
-    this.evaluationService.updateUserRecipe(1, this.cards[this.currentIndex].id, {notes: '', evaluationValue: EvaluationValue.NEUTRAL});
-    this.swipeNeutral();
+    this.userRecipeService.updateUserRecipe(this.userId, this.cards[this.currentIndex].id, {
+      userId: this.userId,
+      recipeId: this.cards[this.currentIndex].id,
+      notes: '',
+      evaluation: EvaluationValue.NEUTRAL
+    }).subscribe(() => {
+      this.swipeNeutral();
+      this.incrementCounterAndCheckMatch();
+    });
   }
 
+
   favoriteCard() {
-    this.evaluationService.updateUserRecipe(1, this.cards[this.currentIndex].id, {notes: '', evaluationValue: EvaluationValue.FAVORITE});
-    this.swipeRight();
+    this.userRecipeService.updateUserRecipe(this.userId, this.cards[this.currentIndex].id, {
+      userId: this.userId,
+      recipeId: this.cards[this.currentIndex].id,
+      notes: '',
+      evaluation: EvaluationValue.FAVORITE
+    }).subscribe(
+      () => {
+        this.swipeRight();
+        this.incrementCounterAndCheckMatch();
+      }
+    );
+    // this.swipeRight();
+    // this.incrementCounterAndCheckMatch();
   }
 
   resetRecipes() {
     this.recipeService.resetRecipes();
-    this.recipeService.getAllRecipesShuffled(this.userID).subscribe((recipes) => {
+    this.recipeService.getAllRecipesShuffled(this.userId).subscribe((recipes) => {
       this.cards = recipes
     })
   }
@@ -168,15 +241,42 @@ export class SwipeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipeService.getAllRecipesShuffled(this.userID).subscribe((recipes) => {
+    this.recipeService.getAllRecipesShuffled(this.userId).subscribe((recipes) => {
       this.cards = recipes
     })
+    // TODO: einkommentieren, wenn Keycloaknutzer in der DB verwendet werden
+    // this.userId = this.keycloakService.userId;
   }
 
   hardResetRecipes() {
     this.recipeService.hardResetRecipes();
-    this.recipeService.getAllRecipesShuffled(this.userID).subscribe((recipes) => {
+    this.recipeService.getAllRecipesShuffled(this.userId).subscribe((recipes) => {
       this.cards = recipes
     })
+  }
+
+  private incrementCounterAndCheckMatch() {
+    this.actionCount++;
+    if (this.actionCount % 10 === 0) {
+      this.match();
+    }
+  }
+
+  private match() {
+    console.log('Match-Funktion ausgelöst bei', this.actionCount);
+    var count = this.matchedRecipes.length;
+    this.recipeService.checkMatch(this.userId)
+      .subscribe((recipes) => {
+        this.matchedRecipes = recipes;
+        if (count < this.matchedRecipes.length) {
+          this.openMatchDialog();
+        }
+      });
+  }
+
+  openMatchDialog() {
+    this.dialog.open(MatchDialogComponent, {
+      width: '400px',
+    });
   }
 }
