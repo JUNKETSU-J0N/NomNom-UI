@@ -1,8 +1,15 @@
 import { Unit} from '../enums/Unit';
 import {PreferenceType} from '../enums/PreferenceType';
 
+export interface IngredientResponse {
+  id: number;
+  name: string;
+  amount: number;
+  unit: Unit;
+}
+
 export interface RecipeIngredientDto {
-  ingredientId: number;
+  ingredient: IngredientResponse;
   amount: number;
   unit: Unit;
 }
