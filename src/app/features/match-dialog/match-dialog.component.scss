@@ -9,7 +9,7 @@ button {
   margin-top: 10px;
 }
 
-h3 {
+h2, .card-title {
   margin-top: 15px;
   margin-left: 1rem;
 }
@@ -30,3 +30,7 @@ p {
   --text-color: var(--text-color);
 }
 
+.recipe-card {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
