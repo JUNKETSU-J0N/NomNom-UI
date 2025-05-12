@@ -3,6 +3,7 @@
     <mat-card-header>
       <mat-card-title>{{ recipe.name }}</mat-card-title>
     </mat-card-header>
+    <img class="recipe-image" [src]="'/images/' + recipe.id + '.jpg'" />
 
     <mat-card-content>
       <p class="description">{{ recipe.description }}</p>
