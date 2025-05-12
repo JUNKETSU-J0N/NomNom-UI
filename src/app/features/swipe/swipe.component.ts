@@ -28,14 +28,16 @@ import {MatTooltip} from '@angular/material/tooltip';
 export class SwipeComponent implements OnInit {
   @ViewChild('cardEl', {static: false}) cardEl!: ElementRef;
 
-  private actionCount = 0;
-  private userId: string = '1';
-  cards: Recipe[] = [];
-  currentIndex = 0;
-  currentTransform = '';
-  private startX = 0;
-  private currentX = 0;
-  private isDragging = false;
+  private actionCount              = 0;
+  private userId: string           = '1';
+  cards: Recipe[]                  = [];
+  currentIndex                     = 0;
+  currentTransform                 = '';
+  private startX                   = 0;
+  private currentX                 = 0;
+  private startY                   = 0;
+  private currentY                 = 0;
+  private isDragging               = false;
   private matchedRecipes: Recipe[] = [];
 
   constructor(
@@ -60,14 +62,20 @@ export class SwipeComponent implements OnInit {
     if (!this.isDragging) return;
 
     this.currentX = event.clientX;
+    this.currentY = event.clientY;
+
     const deltaX = this.currentX - this.startX;
+    const deltaY = this.currentY - this.startY;
+
     const rotation = deltaX * 0.1;
-    this.currentTransform = `translateX(${deltaX}px) rotate(${rotation}deg)`;
+    this.currentTransform = `translate(${deltaX}px, ${deltaY}px) rotate(${rotation}deg)`;
   }
 
   onPointerDown(event: PointerEvent) {
     this.startX = event.clientX;
     this.currentX = this.startX;
+    this.startY = event.clientY;
+    this.currentY = this.startY;
     this.isDragging = true;
   }
 
@@ -76,15 +84,18 @@ export class SwipeComponent implements OnInit {
     this.isDragging = false;
 
     const deltaX = this.currentX - this.startX;
-    const threshold = 300;
+    const deltaY = this.currentY - this.startY;
+
+    const thresholdX = 400;
+    const thresholdY = -300; // Swiping UP means Y decreases
 
     const currentRecipe = this.cards[this.currentIndex];
 
-    if (deltaX > threshold) {
-      // Rechts geswiped → Like
+    if (deltaX > thresholdX) {
+      // Swipe right → LIKE
       this.userRecipeService.updateUserRecipe(this.userId, currentRecipe.id, {
         userId: this.userId,
-        recipeId: this.cards[this.currentIndex].id,
+        recipeId: currentRecipe.id,
         notes: '',
         evaluation: EvaluationValue.LIKE
       }).subscribe(() => {
@@ -92,19 +103,24 @@ export class SwipeComponent implements OnInit {
         this.incrementCounterAndCheckMatch();
       });
 
-    } else if (deltaX < -threshold) {
-      // Links geswiped → Dislike
+    } else if (deltaX < -thresholdX) {
+      // Swipe left → DISLIKE
       this.userRecipeService.updateUserRecipe(this.userId, currentRecipe.id, {
         userId: this.userId,
-        recipeId: this.cards[this.currentIndex].id,
+        recipeId: currentRecipe.id,
         notes: '',
         evaluation: EvaluationValue.DISLIKE
       }).subscribe(() => {
         this.swipeLeft(deltaX);
         this.incrementCounterAndCheckMatch();
       });
+
+    } else if (deltaY < thresholdY) {
+      // Swipe up → NEUTRAL
+      this.markNeutral();
     } else {
-      this.snapBack(deltaX);
+      // Did not exceed any threshold → snap back
+      this.snapBack(deltaX, deltaY);
     }
   }
 
@@ -159,15 +175,45 @@ export class SwipeComponent implements OnInit {
     });
   }
 
+  private stackBack() {
+    const player = this.builder
+      .build([
+        style({ transform: 'translateX(0)', opacity: 1 }),
+        animate(
+          '400ms ease-in',
+          style({
+            transform: 'translate(-50px, -75px) scale(0.90)',
+            opacity: 0
+          })
+        )
+      ])
+      .create(this.cardEl.nativeElement);
+
+    player.play();
+    player.onDone(() => {
+      player.destroy();
+
+      // Move the current card to the back of the stack
+      const card = this.cards[this.currentIndex];
+      this.cards.splice(this.currentIndex, 1);
+      this.cards.push(card);
+
+      this.currentTransform = '';
+
+      // Do NOT increment index since we rotate the array manually
+      this.incrementCounterAndCheckMatch();
+    });
+  }
+
   markNeutral() {
-    this.userRecipeService.updateUserRecipe(this.userId, this.cards[this.currentIndex].id, {
+    const currentCard = this.cards[this.currentIndex];
+    this.userRecipeService.updateUserRecipe(this.userId, currentCard.id, {
       userId: this.userId,
-      recipeId: this.cards[this.currentIndex].id,
+      recipeId: currentCard.id,
       notes: '',
       evaluation: EvaluationValue.NEUTRAL
     }).subscribe(() => {
-      this.swipeNeutral();
-      this.incrementCounterAndCheckMatch();
+      this.stackBack();
     });
   }
 
@@ -218,14 +264,15 @@ export class SwipeComponent implements OnInit {
     });
   }
 
-  private snapBack(fromX: number) {
+  private snapBack(fromX: number, fromY: number = 0) {
     const rotation = fromX * 0.1;
+
     const player = this.builder
       .build([
-        style({transform: `translateX(${fromX}px) rotate(${rotation}deg)`}),
+        style({ transform: `translate(${fromX}px, ${fromY}px) rotate(${rotation}deg)` }),
         animate(
           '300ms ease-out',
-          style({transform: 'translateX(0) rotate(0)'})
+          style({ transform: 'translate(0, 0) rotate(0)' })
         ),
       ])
       .create(this.cardEl.nativeElement);

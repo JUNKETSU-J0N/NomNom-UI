@@ -14,6 +14,14 @@
   margin: 20px auto;
 }
 
+.reset-buttons {
+  display: flex;
+  flex-direction: column; // stack vertically
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
 .card {
   position: absolute;
   width: 100%;
