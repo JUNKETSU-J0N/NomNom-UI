@@ -7,10 +7,10 @@ import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
 import {UserRecipeService} from '../../shared/services/user-recipe.service';
 import {EvaluationValue} from '../../core/enums/EvaluationValue';
-import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {KeycloakService} from '../../utils/keycloak/keycloak.service';
 import {MatDialog} from '@angular/material/dialog';
 import {MatchDialogComponent} from '../match-dialog/match-dialog.component';
+import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-swipe',
@@ -19,7 +19,7 @@ import {MatchDialogComponent} from '../match-dialog/match-dialog.component';
     CommonModule,
     MatIcon,
     MatIconButton,
-    MatProgressSpinner
+    MatTooltip
   ],
   providers: [RecipeService, UserRecipeService],
   templateUrl: './swipe.component.html',
@@ -133,8 +133,6 @@ export class SwipeComponent implements OnInit {
         this.incrementCounterAndCheckMatch();
       }
     );
-    // this.swipeRight();
-    // this.incrementCounterAndCheckMatch();
   }
 
   dislikeCard() {
@@ -192,6 +190,7 @@ export class SwipeComponent implements OnInit {
     this.recipeService.softResetRecipes(this.userId).subscribe((recipes) => {})                          ;
     this.recipeService.getAllRecipesShuffled(this.userId).subscribe((recipes) => {
       this.cards = recipes
+      this.matchedRecipes = [];
     })
   }
 
@@ -250,6 +249,7 @@ export class SwipeComponent implements OnInit {
     this.recipeService.hardResetRecipes(this.userId).subscribe((recipes) => {});
     this.recipeService.getAllRecipesShuffled(this.userId).subscribe((recipes) => {
       this.cards = recipes
+      this.matchedRecipes = [];
     })
   }
 
@@ -261,7 +261,6 @@ export class SwipeComponent implements OnInit {
   }
 
   private match() {
-    console.log('Match-Funktion ausgelöst bei', this.actionCount);
     var count = this.matchedRecipes.length;
     this.recipeService.checkMatch(this.userId)
       .subscribe((recipes) => {
