@@ -21,11 +21,15 @@ export class KeycloakService {
   }
 
   async init() {
-    const authenticated = await this.keycloak?.init({
-      onLoad: 'login-required',
-      checkLoginIframe: false
-    })
+  const authenticated = await this.keycloak?.init({
+    onLoad: 'login-required',
+    checkLoginIframe: false
+  });
+
+  if (authenticated) {
+    localStorage.setItem('token', this.keycloak.token ?? '');
   }
+}
 
   async login() {
     await this.keycloak?.login();
