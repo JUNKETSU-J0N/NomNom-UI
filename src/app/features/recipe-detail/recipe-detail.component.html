@@ -13,7 +13,7 @@
       <h3>Zutaten</h3>
       <mat-list>
         <mat-list-item *ngFor="let ing of recipe.ingredients">
-          <span matLine>{{ ing.amount }} {{ getUnitLabel(ing.unit) }} {{ ing.ingredientId }}</span>
+          <span matLine>{{ ing.amount }} {{ getUnitLabel(ing.unit) }} {{ ing.ingredient.name }}</span>
           <span matLine class="secondary"> </span>
         </mat-list-item>
       </mat-list>
