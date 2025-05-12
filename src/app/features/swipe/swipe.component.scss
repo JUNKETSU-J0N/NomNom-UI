@@ -24,6 +24,9 @@
   touch-action: none;
   user-select: none;
   cursor: grab;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
   &:active {
     cursor: grabbing;
@@ -46,8 +49,15 @@ button {
 }
 
 .card-content {
-  padding: 20px;
+  flex-shrink: 0;
+  padding: 16px;
   text-align: center;
+}
+
+.recipe-image {
+  width: 100%;
+  object-fit: contain;
+  flex-grow: 1;
 }
 
 .reset-buttons {
