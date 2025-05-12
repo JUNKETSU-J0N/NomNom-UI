@@ -1,63 +1,63 @@
-@if (visibleCards.length > 0){
-
 <div class="swipe-container">
-  <button mat-icon-button color="accent" (click)="resetRecipes()" aria-label="Block" >
-    <mat-icon style="color: red">reset</mat-icon>
-  </button>
-  <button mat-icon-button color="danger" (click)="hardResetRecipes()" aria-label="Block" >
-    <mat-icon style="color: red">reset</mat-icon>
-  </button>
-  <div class="card-container">
-    <ng-container *ngFor="let card of visibleCards; let i = index">
-      <div
-        class="card"
-        #cardEl
-        [style.zIndex]="visibleCards.length - i"
-        [style.transform]="i === 0 ? currentTransform : 'scale(0.95) translateY(10px)'"
-        [class.top-card]="i === 0"
-        (pointerdown)="i === 0 && onPointerDown($event)"
-        (pointermove)="i === 0 && onPointerMove($event)"
-        (pointerup)="i === 0 && onPointerUp()"
-        (pointercancel)="i === 0 && onPointerUp()"
-        (pointerleave)="i === 0 && onPointerUp()"
-      >
-        <div class="card-content">
-          <h2>{{ card.name }}</h2>
-          <p>{{ card.description }}</p>
-        </div>
-      </div>
-    </ng-container>
-  </div>
-
   <div class="buttons">
-
-    <button mat-icon-button color="accent" (click)="blockCard()" aria-label="Block" >
-      <mat-icon style="color: red">block</mat-icon>
+    <button mat-icon-button matTooltip="Setze Evaluation auf Neutral bei Geliked und Dislikeden Rezepten" color="primary"
+            (click)="resetRecipes()" aria-label="Block">
+      <mat-icon style="color: blue">refresh</mat-icon>
     </button>
-
-    <button mat-icon-button color="warn" (click)="dislikeCard()" aria-label="Dislike">
-      <mat-icon style="color: red">thumb_down</mat-icon>
-    </button>
-
-    <button mat-icon-button color="accent" (click)="markNeutral()" aria-label="Neutral">
-      <mat-icon style="color: black">sentiment_neutral</mat-icon>
-    </button>
-
-    <button mat-icon-button color="primary" (click)="likeCard()" aria-label="Like">
-      <mat-icon style="color: lawngreen">thumb_up</mat-icon>
-    </button>
-
-
-    <button mat-icon-button color="warn" (click)="favoriteCard()" aria-label="Favorite">
-      <mat-icon style="color: deepskyblue">favorite</mat-icon>
+    <button mat-icon-button matTooltip="Setze Evaluation auf Neutral bei allen Rezepten" color="warn"
+            (click)="hardResetRecipes()" aria-label="Block">
+      <mat-icon style="color: red">delete_history</mat-icon>
     </button>
   </div>
+
+  @if (visibleCards.length > 0) {
+
+    <div class="card-container">
+      <ng-container *ngFor="let card of visibleCards; let i = index">
+        <div
+          class="card"
+          #cardEl
+          [style.zIndex]="visibleCards.length - i"
+          [style.transform]="i === 0 ? currentTransform : 'scale(0.95) translateY(10px)'"
+          [class.top-card]="i === 0"
+          (pointerdown)="i === 0 && onPointerDown($event)"
+          (pointermove)="i === 0 && onPointerMove($event)"
+          (pointerup)="i === 0 && onPointerUp()"
+          (pointercancel)="i === 0 && onPointerUp()"
+          (pointerleave)="i === 0 && onPointerUp()"
+        >
+          <div class="card-content">
+            <h2>{{ card.name }}</h2>
+            <p>{{ card.description }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="buttons">
+
+      <button mat-icon-button color="accent" (click)="blockCard()" aria-label="Block">
+        <mat-icon style="color: red">block</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" (click)="dislikeCard()" aria-label="Dislike">
+        <mat-icon style="color: red">thumb_down</mat-icon>
+      </button>
+
+      <button mat-icon-button color="accent" (click)="markNeutral()" aria-label="Neutral">
+        <mat-icon style="color: black">sentiment_neutral</mat-icon>
+      </button>
+
+      <button mat-icon-button color="primary" (click)="likeCard()" aria-label="Like">
+        <mat-icon style="color: lawngreen">thumb_up</mat-icon>
+      </button>
+
+
+      <button mat-icon-button color="warn" (click)="favoriteCard()" aria-label="Favorite">
+        <mat-icon style="color: deepskyblue">favorite</mat-icon>
+      </button>
+    </div>
+  } @else {
+    Keine Rezepte vorhanden
+  }
 </div>
-
-} @else {
-  <div class="swipe-container">
-
-  <mat-spinner></mat-spinner>
-
-  </div>
-}

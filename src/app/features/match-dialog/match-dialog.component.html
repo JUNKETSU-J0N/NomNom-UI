@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Gefundene Rezepte</h2>
+
+<mat-dialog-content>
+  @if (matchedRecipes.length != 0) {
+    @for (recipe of matchedRecipes; track matchedRecipes.indexOf(recipe)) {
+      <mat-card class="recipe-card">
+        <mat-card-title class="card-title">{{ recipe.name }}</mat-card-title>
+        <mat-card-content>
+          <p>{{ recipe.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="goToRecipe(recipe)">Bring mich hin</button>
+          <button mat-raised-button color="warn" (click)="rejectRecipe(recipe)">Ne, heute doch nicht</button>
+        </mat-card-actions>
+      </mat-card>
+    }
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="closeDialog()">Weitersuchen</button>
+  <button mat-raised-button color="accent" (click)="surpriseMe()">Überrasch mich</button>
+</mat-dialog-actions>
