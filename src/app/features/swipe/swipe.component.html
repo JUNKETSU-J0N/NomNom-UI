@@ -1,6 +1,14 @@
+<div class="swipe-container">
+<div class="buttons">
+  <button mat-icon-button color="primary" (click)="resetRecipes()" aria-label="Block" >
+  <mat-icon style="color: blue">refresh</mat-icon>
+</button>
+  <button mat-icon-button color="warn" (click)="hardResetRecipes()" aria-label="Block" >
+    <mat-icon style="color: red">delete_history</mat-icon>
+  </button></div>
+
 @if (visibleCards.length > 0){
 
-<div class="swipe-container">
   <button mat-icon-button color="accent" (click)="resetRecipes()" aria-label="Block" >
     <mat-icon style="color: red">reset</mat-icon>
   </button>
@@ -52,12 +60,7 @@
       <mat-icon style="color: deepskyblue">favorite</mat-icon>
     </button>
   </div>
-</div>
-
 } @else {
-  <div class="swipe-container">
-
   <mat-spinner></mat-spinner>
-
-  </div>
 }
+</div>

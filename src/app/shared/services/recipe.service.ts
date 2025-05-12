@@ -45,12 +45,15 @@ export class RecipeService {
     return this.httpService.get<Recipe[]>(this.route + '/shuffled', { params });
   }
 
-  resetRecipes(): Observable<Recipe[]> {
-    return this.httpService.get<Recipe[]>(this.route + '/reset');
+  softResetRecipes(userId: string): Observable<Recipe[]> {
+    // const params = new HttpParams().set('userId', userId.toString());
+    return this.httpService.get<Recipe[]>(this.route + '/' + userId + '/soft-reset-evaluations');
   }
 
-  hardResetRecipes(): Observable<Recipe[]> {
-    return this.httpService.get<Recipe[]>(this.route + '/hard-reset');
+  hardResetRecipes(userId: string): Observable<Recipe[]> {
+    // const params = new HttpParams().set('userId', userId.toString());
+
+    return this.httpService.get<Recipe[]>(this.route + '/' + userId + '/hard-reset-evaluations');
   }
 
   checkMatch(userId: string) {

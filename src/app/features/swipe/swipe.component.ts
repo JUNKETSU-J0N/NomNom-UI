@@ -186,12 +186,10 @@ export class SwipeComponent implements OnInit {
         this.incrementCounterAndCheckMatch();
       }
     );
-    // this.swipeRight();
-    // this.incrementCounterAndCheckMatch();
   }
 
   resetRecipes() {
-    this.recipeService.resetRecipes();
+    this.recipeService.softResetRecipes(this.userId).subscribe((recipes) => {})                          ;
     this.recipeService.getAllRecipesShuffled(this.userId).subscribe((recipes) => {
       this.cards = recipes
     })
@@ -249,7 +247,7 @@ export class SwipeComponent implements OnInit {
   }
 
   hardResetRecipes() {
-    this.recipeService.hardResetRecipes();
+    this.recipeService.hardResetRecipes(this.userId).subscribe((recipes) => {});
     this.recipeService.getAllRecipesShuffled(this.userId).subscribe((recipes) => {
       this.cards = recipes
     })
@@ -277,6 +275,8 @@ export class SwipeComponent implements OnInit {
   openMatchDialog() {
     this.dialog.open(MatchDialogComponent, {
       width: '400px',
+      disableClose: true,
+      data: this.matchedRecipes
     });
   }
 }
