@@ -18,7 +18,8 @@ import { ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { getGermanPaginatorIntl } from '../../shared/paginator-intl/german-paginator-intl';
 import { MatSort } from '@angular/material/sort';
 import {
   MatAccordion,
@@ -47,6 +48,10 @@ import {MatIcon} from '@angular/material/icon';
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     MatIcon],
+    providers: [{
+    provide: MatPaginatorIntl,
+    useValue: getGermanPaginatorIntl()
+  }],
 
   templateUrl: './shoppinglist.component.html',
   styleUrls: ['./shoppinglist.component.scss'],
