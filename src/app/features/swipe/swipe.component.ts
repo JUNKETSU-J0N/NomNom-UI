@@ -28,16 +28,16 @@ import {MatTooltip} from '@angular/material/tooltip';
 export class SwipeComponent implements OnInit {
   @ViewChild('cardEl', {static: false}) cardEl!: ElementRef;
 
-  private actionCount              = 0;
-  private userId: string           = '1';
-  cards: Recipe[]                  = [];
-  currentIndex                     = 0;
-  currentTransform                 = '';
-  private startX                   = 0;
-  private currentX                 = 0;
-  private startY                   = 0;
-  private currentY                 = 0;
-  private isDragging               = false;
+  private actionCount = 0;
+  private userId: string = '';
+  cards: Recipe[] = [];
+  currentIndex = 0;
+  currentTransform = '';
+  private startX = 0;
+  private currentX = 0;
+  private startY = 0;
+  private currentY = 0;
+  private isDragging = false;
   private matchedRecipes: Recipe[] = [];
 
   constructor(
@@ -178,7 +178,7 @@ export class SwipeComponent implements OnInit {
   private stackBack() {
     const player = this.builder
       .build([
-        style({ transform: 'translateX(0)', opacity: 1 }),
+        style({transform: 'translateX(0)', opacity: 1}),
         animate(
           '400ms ease-in',
           style({
@@ -233,7 +233,8 @@ export class SwipeComponent implements OnInit {
   }
 
   resetRecipes() {
-    this.recipeService.softResetRecipes(this.userId).subscribe((recipes) => {})                          ;
+    this.recipeService.softResetRecipes(this.userId).subscribe(() => {
+    });
     this.recipeService.getAllRecipesShuffled(this.userId).subscribe((recipes) => {
       this.cards = recipes
       this.matchedRecipes = [];
@@ -269,10 +270,10 @@ export class SwipeComponent implements OnInit {
 
     const player = this.builder
       .build([
-        style({ transform: `translate(${fromX}px, ${fromY}px) rotate(${rotation}deg)` }),
+        style({transform: `translate(${fromX}px, ${fromY}px) rotate(${rotation}deg)`}),
         animate(
           '300ms ease-out',
-          style({ transform: 'translate(0, 0) rotate(0)' })
+          style({transform: 'translate(0, 0) rotate(0)'})
         ),
       ])
       .create(this.cardEl.nativeElement);
@@ -285,15 +286,15 @@ export class SwipeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userId = this.keycloakService.userId;
     this.recipeService.getAllRecipesShuffled(this.userId).subscribe((recipes) => {
       this.cards = recipes
     })
-    // TODO: einkommentieren, wenn Keycloaknutzer in der DB verwendet werden
-    // this.userId = this.keycloakService.userId;
   }
 
   hardResetRecipes() {
-    this.recipeService.hardResetRecipes(this.userId).subscribe((recipes) => {});
+    this.recipeService.hardResetRecipes(this.userId).subscribe(() => {
+    });
     this.recipeService.getAllRecipesShuffled(this.userId).subscribe((recipes) => {
       this.cards = recipes
       this.matchedRecipes = [];
