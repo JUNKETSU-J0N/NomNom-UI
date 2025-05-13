@@ -3,7 +3,7 @@
 <mat-accordion multi>
   <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
-      <mat-panel-title>Add Item</mat-panel-title>
+      <mat-panel-title>Zutat hinzufügen</mat-panel-title>
       <mat-icon>add</mat-icon>
     </mat-expansion-panel-header>
     <form (ngSubmit)="addItem()">
@@ -104,6 +104,6 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.checked]="row.added"></tr>
     </table>
     <div class="button-row">
-      <button mat-raised-button color="warn" type="button" (click)="resetList()">Reset List</button>
+      <button mat-raised-button color="warn" type="button" (click)="resetList()">Einkaufsliste löschen</button>
     </div>
 
