@@ -287,9 +287,7 @@ export class SwipeComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.keycloakService.userId;
-    this.recipeService.getAllRecipesShuffled(this.userId).subscribe((recipes) => {
-      this.cards = recipes
-    })
+    this.resetRecipes()
   }
 
   hardResetRecipes() {
