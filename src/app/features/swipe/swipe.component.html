@@ -30,7 +30,7 @@
             <h2>{{ card.name }}</h2>
             <p>{{ card.description }}</p>
           </div>
-          <img class="recipe-image" *ngIf="cards.length > 0" [src]="'/images/' + cards[currentIndex].id + '.jpg'" />
+          <img class="recipe-image" style="pointer-events: none" [src]="'/images/' + card.id + '.jpg'"  alt="Bild vom Beschreibenen Essen"/>
         </div>
       </ng-container>
     </div>
