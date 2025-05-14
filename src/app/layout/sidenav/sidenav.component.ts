@@ -51,7 +51,6 @@ export class SidenavComponent {
   constructor(
     private router: Router,
   ) {
-    // Update the route display after a successful navigation
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
