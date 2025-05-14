@@ -4,7 +4,8 @@ import {RouterModule} from '@angular/router';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {RecipeService} from '../../shared/services/recipe.service';
 import {Recipe} from '../../core/models/recipe.model';
-import {MatPaginator} from '@angular/material/paginator';
+import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
+import {getGermanPaginatorIntl} from '../../shared/paginator-intl/german-paginator-intl';
 import {
   MatCell, MatCellDef,
   MatColumnDef,
@@ -43,6 +44,10 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
     MatRowDef,
     MatHeaderRowDef
   ],
+  providers: [{
+    provide: MatPaginatorIntl,
+    useValue: getGermanPaginatorIntl()
+  }],
   templateUrl: './myrecipes.component.html',
   styleUrl: './myrecipes.component.scss'
 })
