@@ -3,17 +3,16 @@
     <mat-nav-list>
       <ng-container *ngFor="let item of menuItems; trackBy: trackByFn">
 <!--       Disable von unvollständigen Items -->
-        @if (item.label == "Verlauf" || item.label == "Hilfe" || item.label == "Einstellungen") {
-          <a mat-list-item disabled [routerLink]="item.route" routerLinkActive="active-link" class="sidenav-items">
-            <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-            <span>{{ item.label }}</span>
-          </a>
-        } @else {
-          <a mat-list-item [routerLink]="item.route" routerLinkActive="active-link" class="sidenav-items">
-            <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-            <span>{{ item.label }}</span>
-          </a>
-        }
+      <a
+        mat-list-item
+        [disabled]="item.label == 'Verlauf' || item.label == 'Hilfe'"
+        [routerLink]="item.route"
+        routerLinkActive="active-link"
+        class="sidenav-items"
+      >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+      </a>
 
       </ng-container>
     </mat-nav-list>
