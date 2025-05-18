@@ -33,19 +33,19 @@ describe('SettingsService', () => {
       expect(preference).toEqual(dummyPreference);
     });
 
-    const req = httpMock.expectOne(`/api/user/${dummyUserId}/preference`);
+  const req = httpMock.expectOne(`http://localhost:8080/api/users/${dummyUserId}`);
     expect(req.request.method).toBe('GET');
-    req.flush(dummyPreference); // mock response
+    req.flush({ preference: dummyPreference }); // mock response
   });
 
   it('should set user preference', () => {
     service.setUserPreference(dummyUserId, dummyPreference).subscribe(response => {
-      expect(response).toBeTruthy(); // or test what backend sends
+      expect(response).toEqual(dummyPreference); // because service returns the preference from response
     });
 
-    const req = httpMock.expectOne(`/api/user/${dummyUserId}/preference`);
+    const req = httpMock.expectOne(`http://localhost:8080/api/users/${dummyUserId}/preference`);
     expect(req.request.method).toBe('PUT');
     expect(req.request.body).toEqual({ preference: dummyPreference });
-    req.flush({ success: true }); // mock success response
+    req.flush({ preference: dummyPreference }); // mock response
   });
 });
