@@ -1,0 +1,78 @@
+.preferences {
+  padding: 2rem;
+  background-color: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-surface);
+  border-radius: 12px;
+  max-width: 700px;
+  margin: 2rem auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin-bottom: 1.5rem;
+    color: var(--mat-sys-on-surface);
+    font-size: 1.5rem;
+  }
+}
+
+.preference-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.preference-radio-button {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem 0rem;
+  background-color: var(--mat-sys-surface-container-lowest);
+  border-radius: 8px;
+  width: 100%;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--mat-sys-primary-fixed-dim);
+  }
+
+  .mat-radio-label-content {
+    width: 100%;
+  }
+
+  .preference-info {
+    display: flex;
+    flex-direction: column;
+
+    strong {
+      font-weight: 600;
+      color: var(--mat-sys-on-surface);
+    }
+
+    .description {
+      font-size: 0.9rem;
+      color: var(--mat-sys-on-surface-variant, #666);
+      margin-top: 2px;
+    }
+  }
+}
+
+.reset-button {
+  background-color: var(--mat-sys-primary-fixed-dim);
+  color: var(--mat-sys-on-primary-fixed);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--mat-sys-primary-fixed);
+  }
+}
+
+.button-row {
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
+}

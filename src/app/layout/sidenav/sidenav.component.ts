@@ -41,8 +41,8 @@ export class SidenavComponent {
     {icon: 'star', label: 'FoodMatch', route: '/swipe'},
     {icon: 'restaurant', label: 'Rezepte', route: '/myrecipes'},
     {icon: 'list', label: 'Liste', route: '/list'},
-    {icon: 'history', label: 'Verlauf', route: '/history'},
-    {icon: 'help', label: 'Hilfe', route: '/help'},
+    {icon: 'history', label: 'Verlauf', route: '#'},                  //route '/history' wenn aktiv
+    {icon: 'help', label: 'Hilfe', route: '#'},                       //route '/help' wenn aktiv
     {icon: 'settings', label: 'Einstellungen', route: '/settings'},
     {icon: 'email', label: 'Impressum', route: '/impressum'},
   ];

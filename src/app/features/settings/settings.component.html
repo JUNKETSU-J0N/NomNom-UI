@@ -1,1 +1,33 @@
-<p>Seite um Preferenzen und Allergene einzustellen</p>
+<div class="preferences">
+  <h2>Wähle deine Präferenz</h2>
+
+  <mat-radio-group
+    class="preference-radio-group"
+    [(ngModel)]="selectedPreference"
+    (change)="onPreferenceChange($event.value)"
+    aria-label="User Preference Selection"
+  >
+    <mat-radio-button
+      class="preference-radio-button"
+      *ngFor="let pref of preferenceTypes"
+      [value]="pref.type"
+    >
+      <div class="preference-info">
+        <strong>{{ pref.label }}</strong>
+        <div class="description">{{ pref.description }}</div>
+      </div>
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <div class="button-row">
+    <button
+      mat-raised-button
+      color="warn"
+      type="button"
+      class="reset-button"
+      (click)="resetPreference()"
+    >
+      Präferenz zurücksetzen
+    </button>
+  </div>
+</div>
