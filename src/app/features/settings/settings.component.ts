@@ -15,36 +15,42 @@ import { MatRadioModule } from '@angular/material/radio';
 })
 export class SettingsComponent implements OnInit {
   preferenceTypes = [
-    {
-      type: PreferenceType.NONE,
-      description: 'Keine Präferenz – Ich möchte alles sehen.',
-    },
-    {
-      type: PreferenceType.VEGAN,
-      description:
-        'Komplett pflanzenbasierte Ernährung – ideal für Umweltbewusste oder Personen mit tierfreien Lebensstilen.',
-    },
-    {
-      type: PreferenceType.VEGETARIAN,
-      description:
-        'Ernährung ohne Fleisch oder Fisch, aber mit tierischen Produkten wie Milch oder Eiern – eine ausgewogene und nachhaltige Wahl.',
-    },
-    {
-      type: PreferenceType.MEAT_LOVER,
-      description:
-        'Bevorzugt herzhafte Gerichte mit Fleisch – ideal für proteinreiche und traditionelle Mahlzeiten.',
-    },
-    {
-      type: PreferenceType.PESCETARIAN,
-      description:
-        'Vegetarische Ernährung mit Fisch und Meeresfrüchten – ausgewogen und oft als mediterran inspiriert.',
-    },
-    {
-      type: PreferenceType.HIGH_PROTEIN,
-      description:
-        'Fokus auf eiweißreiche Lebensmittel wie Fleisch, Hülsenfrüchte oder Milchprodukte – ideal für Sportler oder Muskelaufbau.',
-    },
-  ];
+  {
+    type: PreferenceType.NONE,
+    label: 'Keine Präferenz',
+    description: 'Ich möchte alles sehen.',
+  },
+  {
+    type: PreferenceType.VEGAN,
+    label: 'Vegan',
+    description:
+      'Komplett pflanzenbasierte Ernährung – ideal für Umweltbewusste oder Personen mit tierfreien Lebensstilen.',
+  },
+  {
+    type: PreferenceType.VEGETARIAN,
+    label: 'Vegetarisch',
+    description:
+      'Ernährung ohne Fleisch oder Fisch, aber mit tierischen Produkten wie Milch oder Eiern – eine ausgewogene und nachhaltige Wahl.',
+  },
+  {
+    type: PreferenceType.MEAT_LOVER,
+    label: 'Fleischliebhaber',
+    description:
+      'Bevorzugt herzhafte Gerichte mit Fleisch – ideal für proteinreiche und traditionelle Mahlzeiten.',
+  },
+  {
+    type: PreferenceType.PESCETARIAN,
+    label: 'Pescetarisch',
+    description:
+      'Vegetarische Ernährung mit Fisch und Meeresfrüchten – ausgewogen und oft als mediterran inspiriert.',
+  },
+  {
+    type: PreferenceType.HIGH_PROTEIN,
+    label: 'Eiweißreich',
+    description:
+      'Fokus auf eiweißreiche Lebensmittel wie Fleisch, Hülsenfrüchte oder Milchprodukte – ideal für Sportler oder Muskelaufbau.',
+  },
+];
 
   selectedPreference: PreferenceType = PreferenceType.NONE;
   userId: string = ''; // Populate from Keycloak or AuthService
