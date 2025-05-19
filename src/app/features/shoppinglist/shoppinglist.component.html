@@ -28,14 +28,14 @@
 
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Einheit</mat-label>
-        <mat-select [(ngModel)]="newAmount" name="unit" required>
+        <mat-select [(ngModel)]="newUnit" name="unit" required>
           <mat-option *ngFor="let unit of unitEnum | keyvalue" [value]="unit.value">
             {{ unit.value }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <div class="button-row">
-        <button mat-raised-button color="primary" type="submit" (click)="addItem()">Hinzufügen</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting" >Hinzufügen</button>
       </div>
     </form>
 
