@@ -28,7 +28,7 @@
 
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Einheit</mat-label>
-        <mat-select [(ngModel)]="newAmount" name="unit" required>
+        <mat-select [(ngModel)]="newUnit" name="unit" required>
           <mat-option *ngFor="let unit of unitEnum | keyvalue" [value]="unit.value">
             {{ unit.value }}
           </mat-option>

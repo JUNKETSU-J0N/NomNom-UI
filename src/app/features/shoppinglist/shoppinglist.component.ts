@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ShoppingListService } from '../../shared/services/shopping-list.service';
@@ -28,6 +28,7 @@ import {
   MatExpansionPanelTitle
 } from '@angular/material/expansion';
 import {MatIcon} from '@angular/material/icon';
+import {KeycloakService} from '../../utils/keycloak/keycloak.service';
 
 @Component({
   selector: 'app-shoppinglist',
@@ -64,6 +65,7 @@ export class ShoppingListComponent implements OnInit , AfterViewInit
   dataSource = new MatTableDataSource<ShoppingItem>();
 
   shoppingList: ShoppingList | null = null;
+   private readonly keycloakService = inject(KeycloakService);
 
   // Für neue Items
   newIngredientName: string = '';
@@ -105,7 +107,7 @@ export class ShoppingListComponent implements OnInit , AfterViewInit
   }
 
   loadShoppingList(): void {
-    this.shoppingListService.getShoppingList().subscribe({
+    this.shoppingListService.getShoppingList(this.keycloakService.userId).subscribe({
       next: (data) => {
         this.shoppingList = data;
         this.dataSource.data = data.items;
@@ -120,19 +122,18 @@ export class ShoppingListComponent implements OnInit , AfterViewInit
     const newItem = {
       ingredient: {
         name: this.newIngredientName,
-        type: 'OTHER',  // Default für neue Zutaten
-        unit: this.newUnit
+        type: Object.entries(IngredientType).find(([_, val]) => val === this.newType)?.[0],
+        unit: Object.entries(Unit).find(([_, val]) => val === this.newUnit)?.[0],
       },
       amount: this.newAmount,
-      unit: this.newUnit,
       added: false
     };
 
-    this.shoppingListService.addItemToList(newItem).subscribe({
+    this.shoppingListService.addItemToList(this.keycloakService.userId,newItem).subscribe({
       next: () => {
         this.newIngredientName = '';
         this.newAmount = 1;
-        this.newUnit = 'PIECE';
+        this.newUnit = 'OTHER';
         this.loadShoppingList(); // Liste neu laden
       },
       error: (err) => console.error('Fehler beim Hinzufügen', err)
@@ -147,17 +148,17 @@ export class ShoppingListComponent implements OnInit , AfterViewInit
   }
 
   resetList(): void {
-    this.shoppingListService.resetList().subscribe({
+    this.shoppingListService.resetList(this.keycloakService.userId).subscribe({
       next: () => this.loadShoppingList(),
       error: (err) => console.error('Fehler beim Zurücksetzen', err)
     });
   }
   toggleAdded(item: ShoppingItem):void {
     item.added = !item.added;
-    this.shoppingListService.updateItem(item).subscribe({
-      next: () => this.loadShoppingList(),
-      error: (err) => console.error('Fehler beim Updaten', err)
-    })
+  //  this.shoppingListService.updateItem(item).subscribe({
+//next: () => this.loadShoppingList(),
+  //    error: (err) => console.error('Fehler beim Updaten', err)
+    //})
 
   }
 
