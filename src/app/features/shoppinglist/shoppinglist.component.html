@@ -35,7 +35,7 @@
         </mat-select>
       </mat-form-field>
       <div class="button-row">
-        <button mat-raised-button color="primary" type="submit" (click)="addItem()">Hinzufügen</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting" >Hinzufügen</button>
       </div>
     </form>
 

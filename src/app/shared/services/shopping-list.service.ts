@@ -31,6 +31,6 @@ export class ShoppingListService {
   }
 
   updateItem(item: any): Observable<any> {
-    //return this.httpService.put(`${this.apiUrl}/update/items`, item);
+    return this.httpService.put(`${this.apiUrl}/update/items`, item);
   }
 }

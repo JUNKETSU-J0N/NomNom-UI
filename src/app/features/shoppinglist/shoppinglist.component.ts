@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ShoppingListService } from '../../shared/services/shopping-list.service';
@@ -27,8 +27,8 @@ import {
   MatExpansionPanelHeader,
   MatExpansionPanelTitle
 } from '@angular/material/expansion';
-import {MatIcon} from '@angular/material/icon';
-import {KeycloakService} from '../../utils/keycloak/keycloak.service';
+import { MatIcon } from '@angular/material/icon';
+import { KeycloakService } from '../../utils/keycloak/keycloak.service';
 
 @Component({
   selector: 'app-shoppinglist',
@@ -49,7 +49,7 @@ import {KeycloakService} from '../../utils/keycloak/keycloak.service';
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     MatIcon],
-    providers: [{
+  providers: [{
     provide: MatPaginatorIntl,
     useValue: getGermanPaginatorIntl()
   }],
@@ -57,29 +57,29 @@ import {KeycloakService} from '../../utils/keycloak/keycloak.service';
   templateUrl: './shoppinglist.component.html',
   styleUrls: ['./shoppinglist.component.scss'],
 })
-export class ShoppingListComponent implements OnInit , AfterViewInit
-{
+export class ShoppingListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<ShoppingItem>();
 
   shoppingList: ShoppingList | null = null;
-   private readonly keycloakService = inject(KeycloakService);
+  private readonly keycloakService = inject(KeycloakService);
 
   // Für neue Items
   newIngredientName: string = '';
   newAmount: number = 1;
   newUnit: string = 'OTHER'; // Standardwert
   newType: string = 'OTHER'
- displayedColumns: string[] = ['added','name', 'amount','type', 'unit',  'actions'];
- unitEnum = Unit;
- typeEnum = IngredientType;
+  displayedColumns: string[] = ['added', 'name', 'amount', 'type', 'unit', 'actions'];
+  unitEnum = Unit;
+  typeEnum = IngredientType;
 
- selectedUnit: Unit = Unit.OTHER;  // Default-Wert
- selectedType: IngredientType = IngredientType.OTHER;  // Default-Wert
- filterName: string = '';
- filterType: string = '';
+  selectedUnit: Unit = Unit.OTHER;  // Default-Wert
+  selectedType: IngredientType = IngredientType.OTHER;  // Default-Wert
+  filterName: string = '';
+  filterType: string = '';
+  isSubmitting = false;
 
   constructor(private shoppingListService: ShoppingListService) { }
 
@@ -96,7 +96,7 @@ export class ShoppingListComponent implements OnInit , AfterViewInit
     this.dataSource.filterPredicate = (data: ShoppingItem, filter: string) => {
       const [nameFilter, typeFilter] = filter.split('|');
       return data.ingredient.name.toLowerCase().includes(nameFilter) &&
-             data.ingredient.type?.toLowerCase().includes(typeFilter);
+        data.ingredient.type?.toLowerCase().includes(typeFilter);
     };
 
     this.dataSource.filter = `${name}|${type}`;
@@ -118,7 +118,7 @@ export class ShoppingListComponent implements OnInit , AfterViewInit
 
   addItem(): void {
     if (!this.newIngredientName.trim()) return;
-
+    this.isSubmitting = true;
     const newItem = {
       ingredient: {
         name: this.newIngredientName,
@@ -129,11 +129,12 @@ export class ShoppingListComponent implements OnInit , AfterViewInit
       added: false
     };
 
-    this.shoppingListService.addItemToList(this.keycloakService.userId,newItem).subscribe({
+    this.shoppingListService.addItemToList(this.keycloakService.userId, newItem).subscribe({
       next: () => {
         this.newIngredientName = '';
         this.newAmount = 1;
         this.newUnit = 'OTHER';
+        this.isSubmitting = false;
         this.loadShoppingList(); // Liste neu laden
       },
       error: (err) => console.error('Fehler beim Hinzufügen', err)
@@ -153,11 +154,11 @@ export class ShoppingListComponent implements OnInit , AfterViewInit
       error: (err) => console.error('Fehler beim Zurücksetzen', err)
     });
   }
-  toggleAdded(item: ShoppingItem):void {
+  toggleAdded(item: ShoppingItem): void {
     item.added = !item.added;
-  //  this.shoppingListService.updateItem(item).subscribe({
-//next: () => this.loadShoppingList(),
-  //    error: (err) => console.error('Fehler beim Updaten', err)
+    //  this.shoppingListService.updateItem(item).subscribe({
+    //next: () => this.loadShoppingList(),
+    //    error: (err) => console.error('Fehler beim Updaten', err)
     //})
 
   }
