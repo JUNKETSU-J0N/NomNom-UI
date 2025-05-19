@@ -10,27 +10,56 @@ import { Unit } from '../../features/models/unit.enum';
 })
 export class ShoppingListService {
 
-  private apiUrl = 'shoppinglist';
+  private apiUrl = 'shopping-list';
 
   constructor(private httpService: HttpService) { }
 
-  getShoppingList(userID: string): Observable<ShoppingList> {
-    return this.httpService.get<ShoppingList>(`${this.apiUrl}/${userID}`);
+  getShoppingList(): Observable<ShoppingList> {
+    return of({
+      id: 1,
+      items: [
+        {
+          id: 1,
+          ingredient: {
+            id: 1,
+            unit: Unit.PIECE,
+            type: IngredientType.VEGETABLE,
+            name: 'Tomate'
+          },
+          amount: 2,
+          added: false
+        },
+        {
+          id: 2,
+          ingredient: {
+            id: 2,
+            unit: Unit.LITER,
+            type: IngredientType.DAIRY,
+            name: 'Milch'
+          },
+          amount: 1,
+          added: true
+        }
+      ]
+    });
+
+    // TODO richtigen aufruf einkommentieren, wenn Endpoint bereit
+    // return this.httpService.get<ShoppingList>(this.apiUrl);
   }
 
-  addItemToList(userID: string,item: any): Observable<any> {
-    return this.httpService.put(`${this.apiUrl}/${userID}/items`, item);
+  addItemToList(item: any): Observable<any> {
+    return this.httpService.post(`${this.apiUrl}/items`, item);
   }
 
-  removeItem(itemid: number): Observable<void> {
-    return this.httpService.delete<void>(`${this.apiUrl}/delete/${itemid}`);
+  removeItem(id: number): Observable<void> {
+    return this.httpService.delete<void>(`${this.apiUrl}/items/${id}`);
   }
 
-  resetList(userID: string): Observable<void> {
-    return this.httpService.delete<void>(`${this.apiUrl}/reset/${userID}`);
+  resetList(): Observable<void> {
+    return this.httpService.delete<void>(this.apiUrl);
   }
 
   updateItem(item: any): Observable<any> {
-    return this.httpService.put(`${this.apiUrl}/update/items`, item);
+    return this.httpService.post(`${this.apiUrl}/items`, item);
   }
 }
